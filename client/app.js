@@ -30,9 +30,10 @@ function handleRoutes() {
 function switchTo(Presenter, options) {
   if(currentPage) {
     this.container.removeChild(this.container.children[0])
-    currentPage.detach()
+    if (currentPage.detach) currentPage.detach()
   }  
   currentPage = new Presenter(options)
+  currentPage.render()
   this.container.appendChild(currentPage.element)
 }
 
