@@ -1,7 +1,7 @@
 Specifications
 ==============
 
-- the welcome page should show a list of available text to practice typing
+- the welcome page should show a list of available text excerpts to practice typing
 - clicking on a text title should lead to the typing gym for that text
 - the typing gym for a text 
   - the user can view the text excerpt 
