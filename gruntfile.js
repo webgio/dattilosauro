@@ -18,10 +18,18 @@ module.exports = function(grunt) {
                 command: 'http-server'
             }
         },
+        jshint: {
+          all: ['Gruntfile.js', 'client/**/*.js', 'specs/**/*Specs.js'],
+          options: {
+            'asi': true,
+            'laxbreak': true,
+            'laxcomma': true
+          },
+        },
         watch: {
           browserify: {
             files: ["./client/**/*.js", "./client/**/*.hbs", "specs/*Specs.js"],
-            tasks: ['browserify']
+            tasks: ['browserify','jshint']
           }
         },
         concurrent: {
@@ -33,6 +41,7 @@ module.exports = function(grunt) {
     });
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-shell');
     grunt.registerTask('default', ['concurrent:target1']);
