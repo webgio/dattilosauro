@@ -1,26 +1,27 @@
-var domify = require('domify')
+var setupPresenter = require('../setupPresenter')
   , template = require('./indexTemplate.hbs')
   , Excerpts = require('../excerpts')
   , dope = require('dope')
   , navigation = require('../navigation')
-  , Delegate = require('dom-delegate')
 
 var View = function(options) {
-  options = options || {}
-  this.element = options.element || domify('<div></div>')
-  this.excerpts = new Excerpts()
-  this.excerpts.on('reset', this.render.bind(this))
-  this.excerpts.fetch()
-  this.delegate = new Delegate(this.element)
-  this.delegate.on('click', '.typingtext', this.onTextClicked)
-  console.log('Welcome presenter started')
+    setupPresenter.call(this) 
+    this.excerpts = new Excerpts()
+    console.log('Welcome presenter created')
 }
 
 View.prototype = {
+  init: function(){
+    this.excerpts.on('reset', this.render.bind(this))
+    this.excerpts.fetch()
+    this.delegate.on('click', '.typingtext', this.onTextClicked)
+    console.log('Welcome presenter initalized')
+  },
   render: function(){
     this.element.innerHTML = template({
       texts: this.excerpts.collection
     })
+    console.log('Welcome presenter rendered')
     return this
   },
   onTextClicked: function(e, row) {

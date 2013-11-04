@@ -6,6 +6,7 @@ describe("Welcome page", function(){
   beforeEach(function(){
     welcomePage = new WelcomePage()
     spyOn(welcomePage.excerpts , 'fetch')
+    welcomePage.init()
     welcomePage.excerpts.collection = [
      {
        id: 1,

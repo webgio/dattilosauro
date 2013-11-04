@@ -28,7 +28,7 @@ module.exports = function(grunt) {
         },
         watch: {
           browserify: {
-            files: ["client/*.js", "./client/**/*.js", "./client/**/*.hbs", "specs/*Specs.js"],
+            files: ["./client/*.js", "./client/**/*.js", "./client/**/*.hbs", "specs/*Specs.js"],
             tasks: ['browserify','jshint']
           }
         },

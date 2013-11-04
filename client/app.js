@@ -1,6 +1,7 @@
 var domready = require('domready')
   , routing = require('./navigation')
   , WelcomeView = require('./welcome')
+  , GymView = require('./gym')
   , container = null
   , currentPage = null
 
@@ -14,9 +15,9 @@ function run(){
 }
 
 function handleRoutes() {
- // routing.route(/^customer\/(.+)/, function(path) {
- //   switchTo(TypingGymView, { name: path.split('/')[1] })
- // })
+  routing.route(/^typingGym\/(.+)/, function(path) {
+    switchTo(GymView, { id: path.split('/')[1] })
+  })
 
   routing.route(/^$/, function() {
     switchTo(WelcomeView)
@@ -33,6 +34,7 @@ function switchTo(Presenter, options) {
     if (currentPage.detach) currentPage.detach()
   }  
   currentPage = new Presenter(options)
+  if (currentPage.init) currentPage.init()
   currentPage.render()
   this.container.appendChild(currentPage.element)
 }
