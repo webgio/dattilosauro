@@ -13,7 +13,7 @@ var View = function(options) {
   this.excerpts.fetch()
   this.delegate = new Delegate(this.element)
   this.delegate.on('click', '.typingtext', this.onTextClicked)
-  console.log('typingWelcomeView started')
+  console.log('Welcome presenter started')
 }
 
 View.prototype = {
