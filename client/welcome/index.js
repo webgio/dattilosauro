@@ -1,6 +1,6 @@
 var domify = require('domify')
   , template = require('./indexTemplate.hbs')
-  , data = require('../testdata.js')
+  , Excerpts = require('../excerpts')
   , dope = require('dope')
   , navigation = require('../navigation')
   , Delegate = require('dom-delegate')
@@ -8,6 +8,9 @@ var domify = require('domify')
 var View = function(options) {
   options = options || {}
   this.element = options.element || domify('<div></div>')
+  this.excerpts = new Excerpts()
+  this.excerpts.on('reset', this.render.bind(this))
+  this.excerpts.fetch()
   this.delegate = new Delegate(this.element)
   this.delegate.on('click', '.typingtext', this.onTextClicked)
   console.log('typingWelcomeView started')
@@ -16,8 +19,9 @@ var View = function(options) {
 View.prototype = {
   render: function(){
     this.element.innerHTML = template({
-      texts: data
+      texts: this.excerpts.collection
     })
+    return this
   },
   onTextClicked: function(e, row) {
     e.preventDefault()

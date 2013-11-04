@@ -19,7 +19,7 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-          all: ['Gruntfile.js', 'client/**/*.js', 'specs/**/*Specs.js'],
+          all: ['Gruntfile.js', 'client/**/*.js', 'specs/*Specs.js'],
           options: {
             'asi': true,
             'laxbreak': true,
@@ -28,7 +28,7 @@ module.exports = function(grunt) {
         },
         watch: {
           browserify: {
-            files: ["./client/**/*.js", "./client/**/*.hbs", "specs/*Specs.js"],
+            files: ["client/*.js", "./client/**/*.js", "./client/**/*.hbs", "specs/*Specs.js"],
             tasks: ['browserify','jshint']
           }
         },
