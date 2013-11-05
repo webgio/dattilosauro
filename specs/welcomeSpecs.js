@@ -5,7 +5,7 @@ describe("Welcome page", function(){
   var el
   beforeEach(function(){
     welcomePage = new WelcomePage()
-    spyOn(welcomePage.excerpts , 'fetch')
+    spyOn(welcomePage.excerpts, 'fetch')
     welcomePage.init()
     welcomePage.excerpts.collection = [
      {

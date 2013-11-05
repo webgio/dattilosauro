@@ -1,10 +1,10 @@
 Specifications
 ==============
 
-- the welcome page should show a list of available text excerpts to practice typing
-- clicking on a text title should lead to the typing gym for that text
+- [x] the welcome page should show a list of available text excerpts to practice typing
+- [x] clicking on a text title should lead to the typing gym for that text
 - the typing gym for a text 
-  - the user can view the text excerpt 
+  - [x] the user can view the text excerpt 
   - the user can type the text and see what he is typing
   - if the user types a word correctly the word on the excerpt turns
     green
