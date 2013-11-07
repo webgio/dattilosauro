@@ -4,6 +4,8 @@ var setupPresenter = require('../setupPresenter')
   , dope = require('dope')
   , navigation = require('../navigation')
   , Delegate = require('dom-delegate')
+  , sizzle = require('sizzle')
+  , keycode = require('keycode')
 
 var Gym = function(options){
   setupPresenter.call(this)
@@ -14,6 +16,13 @@ var Gym = function(options){
 Gym.prototype = {
   init: function(){
     this.model.on('loaded', this.render.bind(this))
+    var that = this
+    window.addEventListener('keyup', function(e){
+      var typedText = sizzle('#typedText', that.element)[0]
+      var letter = keycode(e.keyCode)
+      if (e.keyCode >= 48 && e.keyCode <= 90) typedText.innerHTML += letter
+      if (letter == 'space') typedText.innerHTML += '&nbsp;'
+    })
     this.model.load()
   },
   render: function(){

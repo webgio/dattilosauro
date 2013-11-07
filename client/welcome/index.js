@@ -1,8 +1,24 @@
 var setupPresenter = require('../setupPresenter')
+  , Handlebars = require('hbsfy/runtime')
+//  , helpers = require('handlebars-helpers')
   , template = require('./indexTemplate.hbs')
   , Excerpts = require('../excerpts')
   , dope = require('dope')
   , navigation = require('../navigation')
+
+Handlebars.registerHelper('truncate', function (str, limit, omission) {
+    if (!omission) {
+      omission = '';
+    }
+    var words = str.split(' ')
+
+    if (words.length > limit) {
+      words.splice(limit, words.length - limit)
+      return words.join(' ') + ' ' + omission
+    } else {
+      return str;
+    }
+  })
 
 var View = function(options) {
     setupPresenter.call(this) 

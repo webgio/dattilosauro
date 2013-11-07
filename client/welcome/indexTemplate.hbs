@@ -1,6 +1,12 @@
-<div>Choose a text to practice typing</div>
-<ul>
-  {{#each texts}}
-  <ul><a href="" class="typingtext" data-id="{{id}}">{{title}}</a></ul>
-  {{/each}}
-</ul>
+<div class="starter-template">
+  <h2>Choose a text to practice typing</h2>
+  <div class="list-group">
+    {{#each texts}}
+    <a href="#" class="list-group-item" data-id='{{id}}'>
+      <h4 class="list-group-item-heading typingtext" data-id='{{id}}'>{{title}}</h4>
+      <p class="list-group-item-text">{{truncate text 20 "..."}}</p>
+    </a>
+    {{/each}}
+  </div>
+  </ul>
+</div>
