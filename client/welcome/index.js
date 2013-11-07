@@ -11,13 +11,12 @@ Handlebars.registerHelper('truncate', function (str, limit, omission) {
       omission = '';
     }
     var words = str.split(' ')
-
-    if (words.length > limit) {
-      words.splice(limit, words.length - limit)
-      return words.join(' ') + ' ' + omission
-    } else {
-      return str;
+    var summary = ''
+    var wordIndex = 0
+    while(summary.length <= limit) {
+      summary += words[wordIndex++] + ' '
     }
+    return summary + omission
   })
 
 var View = function(options) {
