@@ -33,6 +33,9 @@ var iekeyup = function(k) {
 function keyup(el, letter)
 {
     var keyCode = getkeycode(letter)
+    keyupcode(el, keyCode)
+} 
+function keyupcode(el, keyCode) {
     var eventObj = document.createEventObject ?
         document.createEventObject() : document.createEvent("Events");
   
@@ -49,10 +52,10 @@ function keyup(el, letter)
     } else {
       iekeyup(keyCode)
     }
-} 
-
+}
 describe('Gym page', function(){
   var gym
+  var typedText
   beforeEach(function(){
     gym = new Gym({id: 1})
     spyOn(gym.model, 'load')
@@ -63,32 +66,47 @@ describe('Gym page', function(){
        text: "Ishmael"
      }
     gym.render()
+    typedText = sizzle('#typedText', gym.element)
   })
   it('should show the excerpt text', function(){
     var text = sizzle('#excerpt-text', gym.element)
     expect(text[0].textContent).toContain('Ishmael')
   })
-  describe('clicking the "n" key', function(){
+  describe('typing the "o" key', function(){
     beforeEach(function(){
       keyup(document.body, 'o')
     })
     it('should show the letter "o" on the screen', function(){
-      var typedText = sizzle('#typedText', gym.element)
-      expect(typedText[0].innerHTML).toEqual("o")
+      expect(typedText[0].textContent).toEqual("o")
     })
     describe('then typing the "e" key', function(){
-      it('should show "ne" on the screen', function(){
+      beforeEach(function(){
         keyup(document.body, 'e')
-        var typedText = sizzle('#typedText', gym.element)
-        expect(typedText[0].innerHTML).toEqual("oe")
+      })
+      it('should show "oe" on the screen', function(){
+        expect(typedText[0].textContent).toEqual("oe")
+      })
+      describe('then clicking backspace', function(){
+        it('should show "o" on the screen', function(){
+          keyupcode(document.body, 8)
+          expect(typedText[0].innerHTML).toEqual("o")
+        })
       })
     })
   })
   describe('clicking the space key', function(){
-    it('should show a space on the screen', function(){
+    beforeEach(function(){
       keyup(document.body, ' ')
-      var typedText = sizzle('#typedText', gym.element)
+    })
+    it('should show a space on the screen', function(){
       expect(typedText[0].innerHTML).toEqual("&nbsp;")
     })
+    describe('then clicking backspace', function(){
+      it('should empty line', function(){
+        keyupcode(document.body, 8)
+        expect(typedText[0].innerHTML).toEqual("")
+      })
+    })
   })
+  
 })

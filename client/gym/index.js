@@ -29,8 +29,13 @@ Gym.prototype = {
       e.preventDefault()
       var typedText = sizzle('#typedText', that.element)[0]
       var letter = keycode(e.keyCode)
-      if (e.keyCode >= 48 && e.keyCode <= 90) typedText.innerHTML += letter
-      if (e.keyCode == 8) typedText.innerHTML = typedText.innerHTML.substr(0, typedText.innerText.length - 1)
+      if (e.keyCode >= 48 && e.keyCode <= 90) {
+        if (e.shiftKey) letter = letter.toUpperCase()
+        typedText.textContent += letter
+      }
+      if (e.keyCode == 219) typedText.textContent += 'è' 
+      if (e.keyCode >= 97 && e.keyCode <= 122) typedText.textContent += letter
+      if (e.keyCode == 8) typedText.textContent = typedText.textContent.substr(0, typedText.textContent.length - 1)
       if (letter == 'space') typedText.innerHTML += '&nbsp;'
       return false
     })
