@@ -17,9 +17,9 @@ var iekeyup = function(k) {
     });     
 
     if (oEvent.initKeyboardEvent) {
-        oEvent.initKeyboardEvent("keyup", true, true, document.defaultView, false, false, false, false, k, k);
+        oEvent.initKeyboardEvent("keypress", true, true, document.defaultView, false, false, false, false, k, k);
     } else {
-        oEvent.initKeyEvent("keyup", true, true, document.defaultView, false, false, false, false, k, 0);
+        oEvent.initKeyEvent("keypress", true, true, document.defaultView, false, false, false, false, k, 0);
     }
 
     oEvent.keyCodeVal = k;
@@ -40,7 +40,7 @@ function keyupcode(el, keyCode) {
         document.createEventObject() : document.createEvent("Events");
   
     if(eventObj.initEvent){
-      eventObj.initEvent("keyup", true, true);
+      eventObj.initEvent("keypress", true, true);
     }
   
     eventObj.keyCode = keyCode;
@@ -49,7 +49,7 @@ function keyupcode(el, keyCode) {
     //el.dispatchEvent ? el.dispatchEvent(eventObj) : el.fireEvent("onkeyup", eventObj); 
     if (eventObj.initEvent) {
       el.dispatchEvent(eventObj) 
-    } else {
+   } else {
       iekeyup(keyCode)
     }
 }

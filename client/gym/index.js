@@ -18,25 +18,36 @@ Gym.prototype = {
     this.model.on('loaded', this.render.bind(this))
     var that = this
     window.addEventListener('keydown', function(e) {
+      var typedText = sizzle('#typedText', that.element)[0]
       if (e.keyCode == 8) {
         e.stopPropagation()
         e.preventDefault()
+        typedText.textContent = typedText.textContent.substr(0, typedText.textContent.length - 1)
         return false
       } 
     })
-    window.addEventListener('keyup', function(e){
+    window.addEventListener('keypress', function(e){
+    //document.onkeypress = function (e) {
+      e = e || window.event; 
+      var charCode = e.charCode || e.keyCode, 
+          character = String.fromCharCode(charCode);
+      var typedText = sizzle('#typedText', that.element)[0]
+      console.log('pressed', charCode, character)
       e.stopPropagation()
       e.preventDefault()
-      var typedText = sizzle('#typedText', that.element)[0]
-      var letter = keycode(e.keyCode)
-      if (e.keyCode >= 48 && e.keyCode <= 90) {
-        if (e.shiftKey) letter = letter.toUpperCase()
-        typedText.textContent += letter
+      // var letter = keycode(e.keyCode)
+      if (charCode !== 32 && charCode !== 13) {
+      //   if (e.shiftKey) letter = letter.toUpperCase()
+         typedText.textContent += character
       }
-      if (e.keyCode == 219) typedText.textContent += 'è' 
-      if (e.keyCode >= 97 && e.keyCode <= 122) typedText.textContent += letter
-      if (e.keyCode == 8) typedText.textContent = typedText.textContent.substr(0, typedText.textContent.length - 1)
-      if (letter == 'space') typedText.innerHTML += '&nbsp;'
+      // if (e.keyCode == 219) typedText.textContent += 'è' 
+      // if (e.keyCode >= 97 && e.keyCode <= 122) typedText.textContent += letter
+      if (charCode === 32) {
+        typedText.innerHTML += '&nbsp;'
+      }
+      if (charCode === 13) {
+        typedText.innerHTML += '<br />'
+      }
       return false
     })
     this.model.load()

@@ -1,6 +1,5 @@
 var setupPresenter = require('../setupPresenter')
   , Handlebars = require('hbsfy/runtime')
-//  , helpers = require('handlebars-helpers')
   , template = require('./indexTemplate.hbs')
   , Excerpts = require('../excerpts')
   , dope = require('dope')
